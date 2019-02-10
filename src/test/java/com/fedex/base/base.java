@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import util.ReadFromPropertiesFile;
 
 import java.io.IOException;
@@ -19,10 +20,16 @@ public class base {
     public WebDriverWait wait;
     public String url;
 
+    @BeforeTest
+    public void beforeTest(){
+        System.out.println("In at before Test ");
+    }
+
     @BeforeClass
     public void setUp() throws IOException {
         System.setProperty("webdriver.chrome.driver","/Users/rajiv/ReactApp/rajivselenium/src/main/resources/drivers/chromedriver");
 
+        System.out.println("In Before class...");
         driver = new ChromeDriver();
         ReadFromPropertiesFile file = new ReadFromPropertiesFile();
         url= file.getPropVaues("config.properties", "url");
@@ -31,10 +38,10 @@ public class base {
 
     @BeforeMethod
     public void beforeMethod(){
-        //wait=new WebDriverWait(driver, 1300);
-
-
+       System.out.println("In Before method...");
     }
+
+
 
     @AfterClass
     public void afterClass(){

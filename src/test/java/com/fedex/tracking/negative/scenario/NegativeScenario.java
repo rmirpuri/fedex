@@ -18,38 +18,20 @@ import pages.TrackingPageDetails;
 
 public class NegativeScenario extends base {
 
-
-
-
-
     @Test
     public void testIncorrectTrackingNumber() throws InterruptedException {
         driver.get(url);
+        System.out.println("IN  test 1");
         HomePage homePage = new HomePage(driver);
-        //Thread.sleep(3000);
-       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("trackingnumber")));
         homePage.enterTrackingNumber("234234234");
-        //Thread.sleep(3000);
         homePage.clickTrackingButton();
-
-        //Thread.sleep(3000);
-
         TrackingPageDetails trackingPageDetails = new TrackingPageDetails(driver);
         Assert.assertEquals(trackingPageDetails.errorText(), "Not found");
+    }
 
-
-//        WebElement trackingNumberTextBox, trackingButton, notFoundText;
-//        trackingNumberTextBox= wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("trackingnumber")));
-//        trackingNumberTextBox.sendKeys("234234234");
-//        Thread.sleep(3000);
-//
-//        trackingButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='btnSingleTrack']")));
-//        trackingButton.click();
-//
-//        notFoundText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='dp_error_title']")));
-//
-//        Assert.assertEquals(notFoundText.getText(),"Not found");
-
+    @Test
+    public void anotherTest(){
+        System.out.println("IN  test 2");
     }
 
 
