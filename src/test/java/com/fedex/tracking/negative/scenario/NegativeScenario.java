@@ -5,14 +5,10 @@
 package com.fedex.tracking.negative.scenario;
 
 import com.fedex.base.base;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.BasePage;
 import pages.HomePage;
+import pages.HomePageMultipleTrackingPage;
 import pages.TrackingPageDetails;
 
 
@@ -21,18 +17,31 @@ public class NegativeScenario extends base {
     @Test
     public void testIncorrectTrackingNumber() throws InterruptedException {
         driver.get(url);
-        System.out.println("IN  test 1");
+        System.out.println("Tesing Incorrect Tracking number");
         HomePage homePage = new HomePage(driver);
         homePage.enterTrackingNumber("234234234");
         homePage.clickTrackingButton();
         TrackingPageDetails trackingPageDetails = new TrackingPageDetails(driver);
-        Assert.assertEquals(trackingPageDetails.errorText(), "Not found");
+        Assert.assertEquals(trackingPageDetails.getErrorText(), "Not found");
     }
 
     @Test
-    public void anotherTest(){
-        System.out.println("IN  test 2");
+    public void testMultipleTrackingNumbersPage() throws InterruptedException {
+        System.out.println("Multiple Tracking number page displayed Test");
+        driver.get(url);
+        HomePage homePage = new HomePage(driver);
+        HomePageMultipleTrackingPage multipleTrackingPage = homePage.clickMultipleTrackingNumbers();
+        Assert.assertEquals(multipleTrackingPage.getMultipleVerficationNumberText(), "Enter up to 30 FedEx tracking numbers");
     }
 
 
+    @Test
+    public void testInvalidTrackingNumber() throws InterruptedException {
+        driver.get(url);
+        HomePage homePage = new HomePage(driver);
+        HomePageMultipleTrackingPage multipleTrackingPage = homePage.clickMultipleTrackingNumbers();
+        multipleTrackingPage.enterTrackingOnFirstTextBox("2342343243");
+        TrackingPageDetails trackingPageDetails = multipleTrackingPage.clickTrackButton();
+        Assert.assertEquals(trackingPageDetails.getErrorText(), "Not found");
+    }
 }

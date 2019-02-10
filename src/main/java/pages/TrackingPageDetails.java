@@ -22,7 +22,7 @@ public class TrackingPageDetails extends BasePage{
     }
 
 
-    public String errorText(){
+    public String getErrorText(){
         waitForVisibility(notFoundText, driver);
         return  notFoundText.getText();
     }

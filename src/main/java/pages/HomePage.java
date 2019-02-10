@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class HomePage extends BasePage{
 
-    //WebDriver driver;
     public WebDriverWait wait;
 
     @FindBy(name = "trackingnumber")
@@ -20,11 +19,16 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//button[@id='btnSingleTrack']")
     public WebElement trackingButton;
 
+    @FindBy(xpath = "//div[@class='link']/a[text()='MULTIPLE TRACKING NUMBERS']")
+    public  WebElement multipleTrackingNumbers;
+
+
+
+
 
     public HomePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        //super();
     }
 
     public void enterTrackingNumber(String number) throws InterruptedException {
@@ -36,6 +40,13 @@ public class HomePage extends BasePage{
     public void clickTrackingButton(){
         waitForVisibility(trackingButton, driver);
         trackingButton.click();
+
+    }
+
+    public HomePageMultipleTrackingPage clickMultipleTrackingNumbers(){
+        waitForVisibility(multipleTrackingNumbers, driver);
+        multipleTrackingNumbers.click();
+        return new HomePageMultipleTrackingPage(driver);
     }
 
 
